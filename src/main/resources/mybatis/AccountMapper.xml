@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.camunda.bpm.getstarted.loanapproval.mybatis.AccountMapper">
+
+    <select id="getMain" resultType="java.lang.String">
+        select cast(agb.bytes_ as char) from act_ru_execution are
+        LEFT JOIN act_re_procdef arp on are.proc_def_id_ = arp.id_
+        LEFT JOIN act_ge_bytearray agb on arp.deployment_id_ = agb.deployment_id_ and arp.resource_name_ = agb.name_
+        WHERE proc_def_id_ like 'main%' and business_key_=#{contractNo, jdbcType=VARCHAR}
+
+    </select>
+
+</mapper>

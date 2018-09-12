@@ -1,0 +1,55 @@
+server:
+  port: 8081
+camunda:
+  bpm:
+    admin-user:
+      id: demo
+      password: demo
+      firstName: Kermit
+    filter:
+        create: All tasks
+    application:
+      delete-upon-undeploy: false
+      resume-previous-versions: true
+      deploy-changed-only: true
+      scan-for-process-definitions: true
+    job-execution:
+      enabled: true
+    metrics:
+      enabled: true
+    history-level: audit
+    auto-deployment-enabled: false
+    process-engine-name: default
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.2.158:3306/zh_trade?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: dev
+    password: Development#123
+    defaultAutoCommit: false
+    hikari:
+       maximum-pool-size: 20
+       max-lifetime: 30000
+       idle-timeout: 30000
+       data-source-properties:
+         prepStmtCacheSize: 250
+         prepStmtCacheSqlLimit: 2048
+         cachePrepStmts: true
+         useServerPrepStmts: true
+         useLocalTransactionState: true
+         rewriteBatchedStatements: true
+         cacheResultSetMetadata: true
+         cacheServerConfiguration: true
+         elideSetAutoCommits: true
+         maintainTimeStats: true
+  jersey:
+    application-path: /bpm
+
+mybatis:
+  type-aliases-package: org.camunda.bpm.getstarted.loanapproval.mybatis
+  mapper-locations: classpath:/mybatis/*.xml
+  configuration:
+    local-cache-scope: statement
+    cache-enabled: false
+
